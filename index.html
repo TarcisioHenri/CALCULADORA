@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
+  <style>
+    /* Resetando o margin e padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Estilos do corpo */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('https://png.pngtree.com/background/20211215/original/pngtree-cartoon-satellite-ruler-calculator-linear-education-background-picture-image_1458755.jpg') no-repeat center center fixed; /* Imagem de fundo */
+      background-size: cover; /* Faz com que a imagem ocupe toda a tela */
+    }
+
+    /* Estilos da calculadora */
+    .calculadora {
+      width: 320px; /* Aumentando a largura do container */
+      height: 450px; /* Aumentando a altura do container */
+      background: linear-gradient(135deg, #ffffff, #ffffff); /* Degradê suave no fundo do container */
+      padding: 30px; /* Ajustando o padding para o novo tamanho */
+      border-radius: 20px;
+      border: 10px solid #000000; /* Borda colorida laranja */
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .display {
+      width: 100%;
+      height: 55px; /* Aumentando a altura do visor */
+      font-size: 28px; /* Aumentando o tamanho da fonte */
+      text-align: right;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Estilos dos botões */
+    .botoes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px; /* Aumentando o espaço entre os botões */
+    }
+
+    .btn {
+      padding: 18px; /* Aumentando o padding dos botões */
+      font-size: 22px; /* Aumentando o tamanho da fonte dos botões */
+      border: 2px solid #000000;
+      border-radius: 5px;
+      background-color: #f4f4f4;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #e0e0e0;
+    }
+
+    .operador {
+      background-color: #f9a825;
+      color: white;
+    }
+
+    .operador:hover {
+      background-color: #f57f17;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculadora">
+    <input type="text" id="display" class="display" disabled />
+    
+    <div class="botoes">
+      <button class="btn" onclick="adicionarNumero('7')">7</button>
+      <button class="btn" onclick="adicionarNumero('8')">8</button>
+      <button class="btn" onclick="adicionarNumero('9')">9</button>
+      <button class="btn operador" onclick="adicionarOperador('+')">+</button>
+
+      <button class="btn" onclick="adicionarNumero('4')">4</button>
+      <button class="btn" onclick="adicionarNumero('5')">5</button>
+      <button class="btn" onclick="adicionarNumero('6')">6</button>
+      <button class="btn operador" onclick="adicionarOperador('-')">-</button>
+
+      <button class="btn" onclick="adicionarNumero('1')">1</button>
+      <button class="btn" onclick="adicionarNumero('2')">2</button>
+      <button class="btn" onclick="adicionarNumero('3')">3</button>
+      <button class="btn operador" onclick="adicionarOperador('*')">*</button>
+
+      <button class="btn" onclick="adicionarNumero('0')">0</button>
+      <button class="btn" onclick="limparDisplay()">C</button>
+      <button class="btn" onclick="calcularResultado()">=</button>
+      <button class="btn operador" onclick="adicionarOperador('/')">/</button>
+    </div>
+  </div>
+
+  <script>
+    // Variável global para armazenar a expressão atual
+    let expressao = "";
+
+    // Função para adicionar números ou operadores ao visor
+    function adicionarNumero(valor) {
+      expressao += valor;
+      document.getElementById('display').value = expressao;
+    }
+
+    // Função para adicionar operadores (+, -, *, /)
+    function adicionarOperador(operador) {
+      expressao += ` ${operador} `;
+      document.getElementById('display').value = expressao;
+    }
+
+    // Função para limpar o visor
+    function limparDisplay() {
+      expressao = "";
+      document.getElementById('display').value = expressao;
+    }
+
+    // Função para calcular o resultado da expressão
+    function calcularResultado() {
+      try {
+        // Avalia a expressão com a função eval
+        expressao = eval(expressao).toString();
+        document.getElementById('display').value = expressao;
+      } catch (error) {
+        document.getElementById('display').value = "Erro";
+        expressao = "";
+      }
+    }
+  </script>
+
+</body>
+</html>
